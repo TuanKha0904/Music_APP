@@ -3,9 +3,9 @@ import 'package:just_audio/just_audio.dart';
 
 class PlayerButtons extends StatelessWidget {
   const PlayerButtons({
-    super.key,
+    Key? key,
     required this.audioPlayer,
-  });
+  }) : super(key: key);
 
   final AudioPlayer audioPlayer;
 

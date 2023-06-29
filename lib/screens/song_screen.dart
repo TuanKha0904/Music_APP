@@ -12,22 +12,46 @@ class SongScreen extends StatefulWidget {
   State<SongScreen> createState() => _SongScreenState();
 }
 
-class _SongScreenState extends State<SongScreen> {
+class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
   AudioPlayer audioPlayer = AudioPlayer();
+  late AnimationController _animationController;
   Song song = Get.arguments ?? Song.songs[0];
+  bool isPlay = false;
 
   @override
   void initState() {
     super.initState();
 
-    audioPlayer.setAudioSource(ConcatenatingAudioSource(children: [
-      AudioSource.uri(Uri.parse('asset:///${song.url}')),
-    ]));
+    List<AudioSource> audioSources = Song.songs
+        .map((song) => AudioSource.uri(Uri.parse('asset:///${song.url}')))
+        .toList();
+
+    audioPlayer.setAudioSource(ConcatenatingAudioSource(
+      children: audioSources,
+      shuffleOrder: DefaultShuffleOrder(),
+      useLazyPreparation: true,
+    ));
+
+    _animationController = AnimationController(
+      duration: const Duration(seconds: 5),
+      vsync: this,
+    );
+    audioPlayer.playerStateStream.listen((PlayerState state) {
+      setState(() {
+        isPlay = state.playing;
+        if (isPlay) {
+          _animationController.repeat();
+        } else {
+          _animationController.stop();
+        }
+      });
+    });
   }
 
   @override
   void dispose() {
     audioPlayer.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -52,111 +76,18 @@ class _SongScreenState extends State<SongScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            song.coverUrl,
-            fit: BoxFit.cover,
-          ),
           const BackgroundFilter(),
-          _MusicPlayer(
+          ImageMusicRound(
+              animationController: _animationController, song: song),
+          const SizedBox(height: 10.0),
+          MusicPlayer(
             song: song,
             seekBarDataStream: _seekBarDataStream,
             audioPlayer: audioPlayer,
+            animationController: _animationController,
           ),
         ],
       ),
-    );
-  }
-}
-
-class _MusicPlayer extends StatelessWidget {
-  const _MusicPlayer({
-    Key? key,
-    required this.song,
-    required Stream<SeekBarData> seekBarDataStream,
-    required this.audioPlayer,
-  })  : _seekBarDataStream = seekBarDataStream,
-        super(key: key);
-
-  final Song song;
-  final Stream<SeekBarData> _seekBarDataStream;
-  final AudioPlayer audioPlayer;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            song.title,
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall!
-                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 10.0),
-          Text(
-            song.author,
-            maxLines: 2,
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .copyWith(color: Colors.white),
-          ),
-          const SizedBox(height: 30.0),
-          StreamBuilder<SeekBarData>(
-            stream: _seekBarDataStream,
-            builder: (context, snapshot) {
-              final positionData = snapshot.data;
-              return SeekBar(
-                position: positionData?.position ?? Duration.zero,
-                duration: positionData?.duration ?? Duration.zero,
-                onChangeEnd: audioPlayer.seek,
-              );
-            },
-          ),
-          PlayerButtons(audioPlayer: audioPlayer),
-        ],
-      ),
-    );
-  }
-}
-
-class BackgroundFilter extends StatelessWidget {
-  const BackgroundFilter({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: (rect) {
-        return LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.white,
-              Colors.white.withOpacity(0.5),
-              Colors.white.withOpacity(0.0)
-            ],
-            stops: const [
-              0.0,
-              0.4,
-              0.6
-            ]).createShader(rect);
-      },
-      blendMode: BlendMode.dstOut,
-      child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-            Colors.deepPurple.shade200,
-            Colors.deepPurple.shade800
-          ]))),
     );
   }
 }

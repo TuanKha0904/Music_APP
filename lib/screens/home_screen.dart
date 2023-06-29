@@ -162,13 +162,10 @@ class _CustomNavBar extends StatelessWidget {
         showUnselectedLabels: false,
         showSelectedLabels: false,
         items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite_outline), label: 'Favorites'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.play_circle_outline), label: 'Play'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.people_outline), label: 'Profile'),
         ]);
   }
 }
