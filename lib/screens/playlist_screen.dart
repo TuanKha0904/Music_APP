@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../models/playllist_model.dart';
 
 class PlaylistScreen extends StatelessWidget {
@@ -45,7 +45,7 @@ class PlaylistScreen extends StatelessWidget {
   }
 }
 
-class _PlaylistSong extends StatelessWidget {
+class _PlaylistSong extends StatefulWidget {
   const _PlaylistSong({
     Key? key,
     required this.playlists,
@@ -54,33 +54,76 @@ class _PlaylistSong extends StatelessWidget {
   final PlayList playlists;
 
   @override
+  State<_PlaylistSong> createState() => _PlaylistSongState();
+}
+
+class _PlaylistSongState extends State<_PlaylistSong> {
+  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: playlists.songs.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: Text(
-            '${index + 1}',
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-          title: Text(
-            playlists.songs[index].title,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge!
-                .copyWith(fontWeight: FontWeight.bold),
-          ),
-          subtitle: Text('${playlists.songs[index].author} > 02:45'),
-          trailing: const Icon(
-            Icons.more_vert,
-            color: Colors.white,
-          ),
-        );
-      },
+    return Column(
+      children: [
+        ...widget.playlists.songs
+            .map((song) => InkWell(
+                  onTap: () {
+                    Get.toNamed('/song', arguments: song);
+                  },
+                  child: Container(
+                    height: 75.0,
+                    margin: const EdgeInsets.only(bottom: 10.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 167, 74, 238)
+                          .withOpacity(0.6),
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(15.0),
+                          child: Image.asset(
+                            song.coverUrl,
+                            height: 50.0,
+                            width: 50.0,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const SizedBox(width: 20.0),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                song.title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              Text(
+                                song.author,
+                                maxLines: 2,
+                                style: Theme.of(context).textTheme.bodySmall!,
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.play_circle,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ))
+            .toList(),
+      ],
     );
   }
 }
@@ -107,6 +150,7 @@ class _PlayorShufferSwitchState extends State<_PlayorShufferSwitch> {
         });
       },
       child: Container(
+        margin: const EdgeInsets.only(bottom: 30.0),
         height: 50.0,
         width: width,
         decoration: BoxDecoration(

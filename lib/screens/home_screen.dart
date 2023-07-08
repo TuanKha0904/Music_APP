@@ -5,6 +5,7 @@ import '../models/song_model.dart';
 import '../widgets/playlist_cart.dart';
 import '../widgets/section_header.dart';
 import '../widgets/song_cart.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const _DiscoverMusic(),
+              // const _DiscoverMusic(),
               TrendingMusic(songs: songs),
               _PlayListMusic(playlists: playlists)
             ],
@@ -103,50 +104,6 @@ class TrendingMusic extends StatelessWidget {
   }
 }
 
-class _DiscoverMusic extends StatelessWidget {
-  const _DiscoverMusic({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Welcome', style: Theme.of(context).textTheme.bodyLarge),
-          const SizedBox(height: 5.0),
-          Text('Favorite Music',
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium!
-                  .copyWith(fontWeight: FontWeight.bold)),
-          const SizedBox(height: 20.0),
-          TextFormField(
-              style: const TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                  filled: true,
-                  isDense: true,
-                  fillColor: Colors.white,
-                  hintText: 'Search',
-                  hintStyle: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: Colors.grey.shade500),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.grey.shade500,
-                  ),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide.none))),
-        ],
-      ),
-    );
-  }
-}
-
 class _CustomNavBar extends StatelessWidget {
   const _CustomNavBar({
     Key? key,
@@ -161,6 +118,14 @@ class _CustomNavBar extends StatelessWidget {
         selectedItemColor: Colors.white,
         showUnselectedLabels: false,
         showSelectedLabels: false,
+        currentIndex: 1,
+        onTap: (index) {
+          if (index == 0) {
+            Get.toNamed('/search');
+          } else if (index == 2) {
+            Get.toNamed('/favorite');
+          }
+        },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

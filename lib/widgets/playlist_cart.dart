@@ -22,7 +22,7 @@ class PlaylistCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10.0),
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         decoration: BoxDecoration(
-            color: Colors.deepPurple.shade800.withOpacity(0.6),
+            color: const Color.fromARGB(255, 167, 74, 238).withOpacity(0.6),
             borderRadius: BorderRadius.circular(15.0)),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           ClipRRect(
@@ -54,7 +54,10 @@ class PlaylistCard extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.play_circle, color: Colors.white),
+            icon: const Icon(
+              Icons.more_vert,
+              color: Colors.white,
+            ),
           )
         ]),
       ),

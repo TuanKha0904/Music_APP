@@ -9,24 +9,24 @@ class PlayList {
 
   static List<PlayList> playlists = [
     PlayList(
-        title: "Despacito",
+        title: "Young Chill",
         songs: Song.songs,
-        imageUrl: "assets/images/despacitoalbum2.jpg"),
+        imageUrl: "assets/images/unnamed.jpg"),
     PlayList(
-        title: "Hãy trao cho anh",
+        title: "Young Chill",
         songs: Song.songs,
-        imageUrl: "assets/images/Hay-Trao-Cho-Anh.jpg"),
+        imageUrl: "assets/images/unnamed.jpg"),
     PlayList(
-        title: "Lạc trôi",
+        title: "Young Chill",
         songs: Song.songs,
-        imageUrl: "assets/images/Lac_troi_single_sontungmtp.jpg"),
+        imageUrl: "assets/images/unnamed.jpg"),
     PlayList(
-        title: "Making My Way",
+        title: "Young Chill",
         songs: Song.songs,
-        imageUrl: "assets/images/1683254769200_640.jpg"),
+        imageUrl: "assets/images/unnamed.jpg"),
     PlayList(
-        title: "Ngủ một mình",
+        title: "Young Chill",
         songs: Song.songs,
-        imageUrl: "assets/images/1668568582316_640.jpg"),
+        imageUrl: "assets/images/unnamed.jpg"),
   ];
 }

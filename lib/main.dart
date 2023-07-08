@@ -26,7 +26,11 @@ class MusicApp extends StatelessWidget {
         GetPage(name: '/song', page: () => const SongScreen()),
         GetPage(name: '/playlist', page: () => const PlaylistScreen()),
         GetPage(name: '/search', page: () => const SearchScreen()),
-        GetPage(name: '/favorite', page: () => const FavoriteScreen())
+        GetPage(
+            name: '/favorite',
+            page: () => const FavoriteScreen(
+                  favoriteSong: [],
+                ))
       ],
     );
   }

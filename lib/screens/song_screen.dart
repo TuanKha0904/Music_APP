@@ -15,17 +15,23 @@ class SongScreen extends StatefulWidget {
 class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
   AudioPlayer audioPlayer = AudioPlayer();
   late AnimationController _animationController;
-  Song song = Get.arguments ?? Song.songs[0];
+  Rx<Song?> song = Rx(Get.arguments as Song?);
+
   bool isPlay = false;
 
   @override
   void initState() {
     super.initState();
-
     List<AudioSource> audioSources = Song.songs
         .map((song) => AudioSource.uri(Uri.parse('asset:///${song.url}')))
         .toList();
+    int startIndex = song.value != null ? Song.songs.indexOf(song.value!) : 0;
 
+    // Reorder the audio sources based on the start index
+    audioSources = [
+      ...audioSources.sublist(startIndex),
+      ...audioSources.sublist(0, startIndex)
+    ];
     audioPlayer.setAudioSource(ConcatenatingAudioSource(
       children: audioSources,
       shuffleOrder: DefaultShuffleOrder(),
@@ -37,14 +43,16 @@ class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
       vsync: this,
     );
     audioPlayer.playerStateStream.listen((PlayerState state) {
-      setState(() {
-        isPlay = state.playing;
-        if (isPlay) {
-          _animationController.repeat();
-        } else {
-          _animationController.stop();
-        }
-      });
+      if (mounted) {
+        setState(() {
+          isPlay = state.playing;
+          if (isPlay) {
+            _animationController.repeat();
+          } else {
+            _animationController.stop();
+          }
+        });
+      }
     });
   }
 
@@ -77,11 +85,13 @@ class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
         fit: StackFit.expand,
         children: [
           const BackgroundFilter(),
-          ImageMusicRound(
-              animationController: _animationController, song: song),
+          Obx(() => ImageMusicRound(
+                animationController: _animationController,
+                song: song.value!,
+              )),
           const SizedBox(height: 10.0),
           MusicPlayer(
-            song: song,
+            song: song.value!,
             seekBarDataStream: _seekBarDataStream,
             audioPlayer: audioPlayer,
             animationController: _animationController,
