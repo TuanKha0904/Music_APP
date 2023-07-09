@@ -20,8 +20,8 @@ class HomeScreen extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-            Colors.deepPurple.shade800.withOpacity(0.8),
-            Colors.deepPurple.shade200.withOpacity(0.8)
+            const Color.fromARGB(255, 228, 14, 156).withOpacity(0.8),
+            const Color.fromARGB(255, 230, 129, 213).withOpacity(0.8)
           ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -113,7 +113,8 @@ class _CustomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.deepPurple.shade800,
+        backgroundColor:
+            const Color.fromARGB(255, 216, 83, 194).withOpacity(0.8),
         unselectedItemColor: Colors.white,
         selectedItemColor: Colors.white,
         showUnselectedLabels: false,
@@ -155,7 +156,7 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               style: TextStyle(
                   fontSize: 32.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.purple),
+                  color: Colors.redAccent),
             ),
           ],
         ),

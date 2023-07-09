@@ -33,7 +33,7 @@ class SongCard extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 10.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withOpacity(0.6),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -45,17 +45,18 @@ class SongCard extends StatelessWidget {
                     Text(
                       song.title,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Colors.deepPurple,
+                          color: const Color.fromARGB(255, 230, 7, 163),
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
                       song.author,
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: Colors.pinkAccent,
+                          fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
-                const Icon(Icons.play_circle, color: Colors.deepPurple)
+                const Icon(Icons.play_circle, color: Colors.pinkAccent)
               ],
             ),
           ),

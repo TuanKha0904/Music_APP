@@ -11,8 +11,8 @@ class BackgroundFilter extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.deepPurple.shade400,
-            Colors.deepPurple.shade800,
+            const Color.fromARGB(255, 228, 14, 156).withOpacity(0.8),
+            const Color.fromARGB(255, 230, 129, 213).withOpacity(0.8)
           ],
         ).createShader(rect);
       },
@@ -23,9 +23,9 @@ class BackgroundFilter extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.deepPurple,
-              Colors.deepPurple.withOpacity(0.5),
-              Colors.deepPurple.withOpacity(0.0),
+              Colors.pinkAccent,
+              const Color.fromARGB(255, 228, 14, 156).withOpacity(0.8),
+              const Color.fromARGB(255, 216, 83, 194).withOpacity(0.8),
             ],
             stops: const [0.0, 0.4, 0.6],
           ),

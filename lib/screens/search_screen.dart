@@ -12,8 +12,8 @@ class SearchScreen extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-              Colors.deepPurple.shade800.withOpacity(0.8),
-              Colors.deepPurple.shade200.withOpacity(0.8)
+              const Color.fromARGB(255, 228, 14, 156).withOpacity(0.8),
+              const Color.fromARGB(255, 230, 129, 213).withOpacity(0.8)
             ])),
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -92,8 +92,8 @@ class _DiscoverMusicState extends State<_DiscoverMusic> {
                       margin: const EdgeInsets.only(bottom: 10.0),
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 112, 39, 160)
-                            .withOpacity(0.6),
+                        color: const Color.fromARGB(255, 253, 99, 217)
+                            .withOpacity(0.8),
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                       child: Row(

@@ -7,15 +7,15 @@ class PlaylistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PlayList playlists = PlayList.playlists[0];
+    PlayList playlists = Get.arguments as PlayList;
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-            Colors.deepPurple.shade800.withOpacity(0.8),
-            Colors.deepPurple.shade200.withOpacity(0.8)
+            const Color.fromARGB(255, 228, 14, 156).withOpacity(0.8),
+            const Color.fromARGB(255, 230, 129, 213).withOpacity(0.8)
           ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -72,8 +72,8 @@ class _PlaylistSongState extends State<_PlaylistSong> {
                     margin: const EdgeInsets.only(bottom: 10.0),
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 167, 74, 238)
-                          .withOpacity(0.6),
+                      color: const Color.fromARGB(255, 253, 99, 217)
+                          .withOpacity(0.8),
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: Row(
@@ -166,7 +166,7 @@ class _PlayorShufferSwitchState extends State<_PlayorShufferSwitch> {
                 height: 50.0,
                 width: width * 0.45,
                 decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade400,
+                  color: Colors.pink.shade400,
                   borderRadius: BorderRadius.circular(20.0),
                 ),
               ),
@@ -181,14 +181,14 @@ class _PlayorShufferSwitchState extends State<_PlayorShufferSwitch> {
                         child: Text(
                           'Play',
                           style: TextStyle(
-                              color: isPlay ? Colors.white : Colors.deepPurple,
+                              color: isPlay ? Colors.white : Colors.pinkAccent,
                               fontSize: 20.0),
                         ),
                       ),
                       const SizedBox(width: 10.0),
                       Icon(
                         Icons.play_circle,
-                        color: isPlay ? Colors.white : Colors.deepPurple,
+                        color: isPlay ? Colors.white : Colors.pinkAccent,
                       )
                     ],
                   ),
@@ -201,13 +201,13 @@ class _PlayorShufferSwitchState extends State<_PlayorShufferSwitch> {
                         child: Text(
                           'Shuffer',
                           style: TextStyle(
-                              color: isPlay ? Colors.deepPurple : Colors.white,
+                              color: isPlay ? Colors.pinkAccent : Colors.white,
                               fontSize: 20.0),
                         ),
                       ),
                       Icon(
                         Icons.shuffle,
-                        color: isPlay ? Colors.deepPurple : Colors.white,
+                        color: isPlay ? Colors.pinkAccent : Colors.white,
                       )
                     ],
                   ),

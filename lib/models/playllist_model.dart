@@ -13,20 +13,21 @@ class PlayList {
         songs: Song.songs,
         imageUrl: "assets/images/unnamed.jpg"),
     PlayList(
-        title: "Young Chill",
+        title: "Lofi Chill",
         songs: Song.songs,
-        imageUrl: "assets/images/unnamed.jpg"),
+        imageUrl:
+            "assets/images/lofi-chill-anime-girl-4K-wallpaper-pc-preview.jpg"),
     PlayList(
-        title: "Young Chill",
+        title: "EDM",
         songs: Song.songs,
-        imageUrl: "assets/images/unnamed.jpg"),
+        imageUrl: "assets/images/edm-118.jpg.crdownload"),
     PlayList(
-        title: "Young Chill",
+        title: "Vinahouse",
         songs: Song.songs,
-        imageUrl: "assets/images/unnamed.jpg"),
+        imageUrl: "assets/images/unnamed (1).jpg"),
     PlayList(
-        title: "Young Chill",
+        title: "Trap Music Mix",
         songs: Song.songs,
-        imageUrl: "assets/images/unnamed.jpg"),
+        imageUrl: "assets/images/trapmusicjulyedition.jpg.crdownload"),
   ];
 }
